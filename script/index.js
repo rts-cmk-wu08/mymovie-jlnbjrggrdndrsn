@@ -1,19 +1,14 @@
 import { genres } from "./genres.js"
 import { makeElement } from "./modules/makeElement.js"
+import header from "./modules/header.js"
 
 let baseURL = "https://api.themoviedb.org/3"
 let apikey = "ad55dcf4459bd5972e3cb59cf4ff2ac7"
 
 let wrapperElm = document.querySelector(".wrapper")
 
-let headerElm = makeElement("header", "header")
-headerElm.classList.add("flex-container")
-wrapperElm.append(headerElm)
-headerElm.innerHTML = `
-    <h1>MyMovies</h1>
-    <input type="checkbox" id="darkmode_toggle">
-    <label for="darkmode_toggle"></label>
-    `
+wrapperElm.append(header())
+
 document.getElementById("darkmode_toggle").addEventListener("change", function() {
     if (document.getElementById("darkmode_toggle").checked == true) {
         document.getElementsByTagName("body")[0].setAttribute("style", "color: white; background-color: black;");
