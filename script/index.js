@@ -7,20 +7,13 @@ let apikey = "ad55dcf4459bd5972e3cb59cf4ff2ac7"
 let wrapperElm = document.querySelector(".wrapper")
 
 let headerElm = makeElement("header", "header")
+headerElm.classList.add("flex-container")
 wrapperElm.append(headerElm)
-
-let mainElm = document.createElement("main")
-wrapperElm.append(mainElm)
-
-let footerElm = document.createElement("footer")
-wrapperElm.append(footerElm)
-
 headerElm.innerHTML = `
     <h1>MyMovies</h1>
     <input type="checkbox" id="darkmode_toggle">
     <label for="darkmode_toggle"></label>
     `
-
 document.getElementById("darkmode_toggle").addEventListener("change", function() {
     if (document.getElementById("darkmode_toggle").checked == true) {
         document.getElementsByTagName("body")[0].setAttribute("style", "color: white; background-color: black;");
@@ -30,23 +23,23 @@ document.getElementById("darkmode_toggle").addEventListener("change", function()
     }
 });
 
-//Now showing logic here!!!
+let mainElm = makeElement("main")
+wrapperElm.append(mainElm)
 
+let footerElm = makeElement("footer")
+wrapperElm.append(footerElm)
 
-
-
-let nowshowingElm = document.createElement("section")
-nowshowingElm.classList.add("now_showing")
+let nowshowingElm = makeElement("section", "now_showing")
 mainElm.append(nowshowingElm)
 
-let nowshowingHeader = document.createElement("header")
+let nowshowingHeader = makeElement("header")
 nowshowingHeader.innerHTML = `
     <h2>Now Showing</h2>
     <a href="#">See more</a>
     `
 nowshowingElm.append(nowshowingHeader)
 
-let nowshowingMovies = document.createElement("div")
+let nowshowingMovies = makeElement("div")
 nowshowingElm.append(nowshowingMovies)
 
 fetch(`${baseURL}/movie/now_playing?api_key=${apikey}`)
